@@ -6,20 +6,196 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace code
-{
+{ 
     internal class Program
     {
         static void Main(string[] args)
         {
-            string[] text = System.IO.File.ReadAllLines(@"C:\Users\havli\Webs\Advent2022\Task10\Task10.txt");
+            string[] text = System.IO.File.ReadAllLines(@"C:\Users\havli\Webs\Advent2022\code\Task12\Task12.txt");
 
 
-            int twenty = 0;
+            List<List<char>> array = new List<List<char>>(); 
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                array.Add(new List<char>());
+                foreach(char c in text[i])
+                {
+                    array[i].Add(c);
+                }
+              
+            }
+
+            foreach(List<char> list in array)
+            {
+                foreach(char c in list)
+                {
+                    Console.Write(c);
+                }
+                Console.WriteLine();
+            }
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /*                                            ///////////////////////////////////////   Task 11 1/2
+              List<List<int>> monkes = new List<List<int>>();
+
+            monkes.Add(new List<int> { 65, 78 });
+            monkes.Add(new List<int> { 54, 78, 86, 79, 73, 64, 85, 88 });
+            monkes.Add(new List<int> { 69, 97, 77, 88, 87 });
+            monkes.Add(new List<int> { 99 });
+            monkes.Add(new List<int> { 60, 57, 52 });
+            monkes.Add(new List<int> { 91, 82, 85, 73, 84, 53 });
+            monkes.Add(new List<int> { 88, 74, 68, 56 });
+            monkes.Add(new List<int> { 54, 82, 72, 71, 53, 99, 67 });
+            List<int> counters = new List<int>() { 0,0,0,0,0,0,0,0};
+
+            int counter = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+               
+                if (text[i].Contains("Monke"))
+                {
+                    int active = Convert.ToInt32(Regex.Match(text[i], @"\d+").Value);
+                  
+
+                    foreach (int x in monkes[active])
+                    {
+                        int final = 0;
+                       
+                        if (text[i + 2].Contains("*"))
+                        {
+                            if (text[i + 2].Any(char.IsDigit))
+                            {
+                               
+                                int increaser = Convert.ToInt32(Regex.Match(text[i + 2], @"\d+").Value);
+                                
+                                final = x * increaser;
+                            }
+                            else
+                            {
+                               
+                                final = x * x;
+                            }
+                            counters[active]++;
+                        }
+                     
+                        if (text[i + 2].Contains("+"))
+                        {
+                            int increaser = Convert.ToInt32(Regex.Match(text[i + 2], @"\d+").Value);
+                            counters[active]++;
+                            final = x + increaser;
+                           
+                        }
+
+                        final = final / 120;
+                        
+
+                        int divisibler = Convert.ToInt32(Regex.Match(text[i + 3], @"\d+").Value);
+
+                        if (final != 0)
+                        {
+                           
+                            if (final % divisibler == 0)
+                            {
+                                int pointer = Convert.ToInt32(Regex.Match(text[i + 4], @"\d+").Value);
+                               
+                                monkes[pointer].Add(final);
+                               
+                            }
+                            else
+                            {
+                                int pointer = Convert.ToInt32(Regex.Match(text[i + 5], @"\d+").Value);
+                             
+                                monkes[pointer].Add(final);
+
+
+
+
+                            }
+                        }
+                       
+
+
+
+                        
+                          
+                        
+
+
+
+
+                    }
+                    monkes[active].Clear();
+                    if (active == 7)
+                    {
+                       
+                        counter++;
+                        i = -1;
+                    }
+                    if (counter == 10000)
+                    {
+                        counters.Sort();
+                        foreach(int x in counters)
+                        {
+                            Console.WriteLine(x);
+                        }
+                        break;
+                    }
+                }
+                
+            }
+
+             */                                 ///////////////////////////////////////
+
+
+
+            /*                                  ///////////////////////////////////////    TASK 10 1/2
+               int twenty = 0;
             int sixty = 0;
             int onehundred = 0;
             int oneforty = 0;
             int oneeighty = 0;
             int twotwenty = 0;
+            int strength = 0;
 
             int X = 1;
             int cycle = 0;
@@ -27,60 +203,63 @@ namespace code
             {
 
                 int num;
+                int repeat = 0;
                 if (line.Contains("noop"))
                 {
-                    num = 1;
+                    num = 0;
+                    repeat = 1;
                 }
                 else
                 {
                     num = Convert.ToInt32(Regex.Match(line, @"\d+").Value);
+                    repeat = 2;
                 }
 
-                for (int i = 0; i < num; i++)
+                for (int i = 0; i < repeat; i++)
                 {
-                    if (line.Contains("-"))
-                    {
-                        cycle -= 1;
-                    }
-                    else
-                    {
-                        cycle += 1;
-                    }
+                    cycle += 1;
+
 
                     if (cycle == 20 && twenty == 0)
                     {
                         twenty = X;
                         Console.WriteLine(twenty);
+                        strength += 20 * X;
                     }
 
                     if (cycle == 60 && sixty == 0)
                     {
                         sixty = X;
                         Console.WriteLine(sixty);
+                        strength += 60 * X;
                     }
 
                     if (cycle == 100 && onehundred == 0)
                     {
                         onehundred = X;
                         Console.WriteLine(onehundred);
+                        strength += 100 * X;
                     }
 
                     if (cycle == 140 && oneforty == 0)
                     {
                         oneforty = X;
                         Console.WriteLine(oneforty);
+                        strength += 140 * X;
                     }
 
                     if (cycle == 180 && oneeighty == 0)
                     {
                         oneeighty = X;
                         Console.WriteLine(oneeighty);
+                        strength += 180 * X;
                     }
 
                     if (cycle == 220 && twotwenty == 0)
                     {
                         twotwenty = X;
                         Console.WriteLine(twotwenty);
+                        strength += 220 * X;
                     }
 
 
@@ -103,53 +282,8 @@ namespace code
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            Console.WriteLine(strength);
+             */                         ///////////////////////////////////////
 
 
 
