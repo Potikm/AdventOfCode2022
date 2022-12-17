@@ -8,14 +8,14 @@ namespace code
 {
     internal class Point
     {
-        public int X;
-        public int Y;
+        public int ver;
+        public int hor;
         public int Length;
 
         public Point(int a, int b, int Length)
         {
-            X = a;
-            Y = b;
+            ver = a;
+            hor = b;
             this.Length = Length;
         }
     }

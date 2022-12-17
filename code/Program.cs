@@ -13,28 +13,84 @@ namespace code
         {
             string[] text = System.IO.File.ReadAllLines(@"C:\Users\havli\Webs\Advent2022\code\Task12\Task12.txt");
 
-
-            List<List<char>> array = new List<List<char>>(); 
-
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            List<List<char>> array = new List<List<char>>();
             for (int i = 0; i < text.Length; i++)
             {
                 array.Add(new List<char>());
-                foreach(char c in text[i])
+                foreach (char c in text[i])
                 {
                     array[i].Add(c);
                 }
-              
+
             }
 
-            foreach(List<char> list in array)
+            Point[,] points = new Point[array.Count, array[0].Count];
+
+           
+
+            int ver = 0;
+            int hor = 0;
+            int length = 0;
+
+            List<Point> unvisited = new List<Point>();  
+
+            for (int i = 0; i < array.Count; i++)
             {
-                foreach(char c in list)
+                for (int j = 0; j < array[i].Count; j++)
                 {
-                    Console.Write(c);
+                    if(array[i][j] == 'S')
+                    {
+
+                        points[i, j] = new Point(i, j, length);
+                        unvisited.Add(new Point(i, j, length));
+                        ver = i;
+                        hor = j;
+                      
+                    }
                 }
-                Console.WriteLine();
             }
 
+            while(unvisited.Count > 0)
+            {
+                int ver2 = unvisited[0].ver;
+                int hor2 = unvisited[0].hor;
+                int index =  alphabet.IndexOf(array[ver2][hor2]);
+
+                //top
+                if (ver2 > 0 && points[ver2 - 1, hor2] == null && array[ver2-1][hor2] == alphabet[index] || array[ver2 - 1][hor2] == alphabet[index + 1])
+                {
+                    unvisited.Add(new Point(ver2 - 1, hor2, unvisited[0].Length + 1));
+
+                }
+
+                //left
+
+                if (hor2 > 0 && points[ver2, hor2 - 1] == null && array[ver2][hor2 - 1] == alphabet[index] || array[ver2][hor2 - 1] == alphabet[index + 1])
+                {
+                    unvisited.Add(new Point(ver2, hor2 - 1, unvisited[0].Length + 1));
+
+                }
+
+                //right
+
+                if (hor2 < array[0].Count - 1 && points[ver2, hor2 + 1] == null && array[ver2][hor2 + 1] == alphabet[index] || array[ver2][hor2 + 1] == alphabet[index + 1])
+                {
+                    unvisited.Add(new Point(ver2, hor2 + 1, unvisited[0].Length + 1));
+
+                }
+
+                // bottom 
+
+                if (ver2 < array.Count - 1 && points[ver2 + 1, hor2] == null && array[ver2 + 1][hor2] == alphabet[index] || array[ver2 + 1][hor2] == alphabet[index + 1])
+                {
+                    unvisited.Add(new Point(ver2 + 1, hor2, unvisited[0].Length + 1));
+
+                }
+                unvisited.RemoveAt(0);
+
+            }
+          
 
       
 
