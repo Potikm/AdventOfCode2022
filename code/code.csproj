@@ -44,7 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Monkey.cs" />
+<<<<<<< HEAD
     <Compile Include="Point.cs" />
+=======
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

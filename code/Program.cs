@@ -11,6 +11,7 @@ namespace code
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             string[] text = System.IO.File.ReadAllLines(@"C:\Users\havli\Webs\Advent2022\code\Task12\Task12.txt");
 
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -21,6 +22,179 @@ namespace code
                 foreach (char c in text[i])
                 {
                     array[i].Add(c);
+=======
+            string[] text = System.IO.File.ReadAllLines(@"C:\Users\havli\Webs\Advent2022\code\Task11\Task11.txt");
+
+            List<List<int>> monkes = new List<List<int>>();
+
+            monkes.Add(new List<int> { 65, 78 });
+            monkes.Add(new List<int> { 54, 78, 86, 79, 73, 64, 85, 88 });
+            monkes.Add(new List<int> { 69, 97, 77, 88, 87 });
+            monkes.Add(new List<int> { 99 });
+            monkes.Add(new List<int> { 60, 57, 52 });
+            monkes.Add(new List<int> { 91, 82, 85, 73, 84, 53 });
+            monkes.Add(new List<int> { 88, 74, 68, 56 });
+            monkes.Add(new List<int> { 54, 82, 72, 71, 53, 99, 67 });
+            List<int> counters = new List<int>() { 0,0,0,0,0,0,0,0};
+
+            int counter = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i].Contains("Monke"))
+                {
+                    int active = Convert.ToInt32(Regex.Match(text[i], @"\d+").Value);
+                    Console.WriteLine(text[i]);
+
+                    foreach (int x in monkes[active])
+                    {
+                        int final = 0;
+                       
+                        if (text[active + 2].Contains("*"))
+                        {
+                            if (text[active + 2].Any(char.IsDigit))
+                            {
+                               
+                                int increaser = Convert.ToInt32(Regex.Match(text[i + 2], @"\d+").Value);
+                                Console.WriteLine(increaser);
+                                final = x * increaser;
+                            }
+                            else
+                            {
+                                
+                                final = x * x;
+                            }
+
+                        }
+                        if (text[active + 2].Contains("+"))
+                        {
+                            int increaser = Convert.ToInt32(Regex.Match(text[i + 2], @"\d+").Value);
+                            Console.WriteLine(increaser);
+                            final = x + increaser;
+
+                        }
+
+                        final = final / 3;
+
+                        int divisibler = Convert.ToInt32(Regex.Match(text[i + 3], @"\d+").Value);
+
+                        if (final != 0)
+                        {
+                            
+                            if (final % divisibler == 0)
+                            {
+                                int pointer = Convert.ToInt32(Regex.Match(text[i + 4], @"\d+").Value);
+                                Console.WriteLine(text[i + 4]);
+                                monkes[pointer].Add(final);
+                                
+                                counters[pointer]++;
+                            }
+                            else
+                            {
+                                int pointer = Convert.ToInt32(Regex.Match(text[i + 5], @"\d+").Value);
+                                Console.WriteLine(text[i + 5]);
+                                monkes[pointer].Add(final);
+                               
+                                counters[pointer]++;
+                            }
+                        }
+                       
+
+
+
+                        
+                          
+                        
+
+
+
+
+                    }
+                    monkes[active].Clear();
+                    if (active == 7)
+                    {
+                        counter++;
+                        i = 0;
+                    }
+                    if (counter == 20)
+                    {
+                        foreach(int x in counters)
+                        {
+                            Console.WriteLine(x);
+                        }
+                        break;
+                    }
+                }
+                
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /*                                  ///////////////////////////////////////    TASK 10 1/2
+               int twenty = 0;
+            int sixty = 0;
+            int onehundred = 0;
+            int oneforty = 0;
+            int oneeighty = 0;
+            int twotwenty = 0;
+            int strength = 0;
+
+            int X = 1;
+            int cycle = 0;
+            foreach (string line in text)
+            {
+
+                int num;
+                int repeat = 0;
+                if (line.Contains("noop"))
+                {
+                    num = 0;
+                    repeat = 1;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                 }
 
             }
@@ -31,11 +205,17 @@ namespace code
             {
                 for (int j = 0; j < points.GetLength(1); j++)
                 {
+<<<<<<< HEAD
                     points[i, j] = new Point(0,0,-1);
+=======
+                    num = Convert.ToInt32(Regex.Match(line, @"\d+").Value);
+                    repeat = 2;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                 }
             }
 
 
+<<<<<<< HEAD
             int ver = 0;
             int hor = 0;
             int length = 0;
@@ -55,6 +235,18 @@ namespace code
                         ver = i;
                         hor = j;
                       
+=======
+                for (int i = 0; i < repeat; i++)
+                {
+                    cycle += 1;
+
+
+                    if (cycle == 20 && twenty == 0)
+                    {
+                        twenty = X;
+                        Console.WriteLine(twenty);
+                        strength += 20 * X;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                     }
                 }
             }
@@ -73,6 +265,7 @@ namespace code
                 {
                     if (ver2 > 0 && points[ver2 - 1, hor2].Length == -1 && array[ver2 - 1][hor2] == alphabet[index] || array[ver2 - 1][hor2] == alphabet[index + 1])
                     {
+<<<<<<< HEAD
                         unvisited.Add(new Point(ver2 - 1, hor2, unvisited[0].Length + 1));
                         points[ver2 - 1, hor2] = new Point(ver2 - 1, hor2, length);
 
@@ -83,10 +276,23 @@ namespace code
                             Console.WriteLine(counter);
                             break;
                         }
+=======
+                        sixty = X;
+                        Console.WriteLine(sixty);
+                        strength += 60 * X;
+                    }
+
+                    if (cycle == 100 && onehundred == 0)
+                    {
+                        onehundred = X;
+                        Console.WriteLine(onehundred);
+                        strength += 100 * X;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                     }
 
                     if (points[ver2 - 1, hor2].Length == -1 && array[ver2 - 1][hor2] == 'm' && array[ver2][hor2] == 'o')
                     {
+<<<<<<< HEAD
                         unvisited.Add(new Point(ver2 - 1, hor2, unvisited[0].Length + 1));
                         points[ver2 - 1, hor2] = new Point(ver2 - 1, hor2, length);
 
@@ -97,6 +303,11 @@ namespace code
                             Console.WriteLine(counter);
                             break;
                         }
+=======
+                        oneforty = X;
+                        Console.WriteLine(oneforty);
+                        strength += 140 * X;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                     }
                 }
             
@@ -107,6 +318,7 @@ namespace code
                 {
                     if (hor2 > 0 && points[ver2, hor2 - 1].Length == -1 && array[ver2][hor2 - 1] == alphabet[index] || array[ver2][hor2 - 1] == alphabet[index + 1])
                     {
+<<<<<<< HEAD
                         unvisited.Add(new Point(ver2, hor2 - 1, unvisited[0].Length + 1));
                         points[ver2, hor2 - 1] = new Point(ver2, hor2 - 1, length);
                         Console.WriteLine("left");
@@ -116,10 +328,16 @@ namespace code
                             Console.WriteLine(counter);
                             break;
                         }
+=======
+                        oneeighty = X;
+                        Console.WriteLine(oneeighty);
+                        strength += 180 * X;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                     }
 
                     if (points[ver2, hor2 - 1].Length == -1 && array[ver2][hor2 - 1] == 'm' && array[ver2][hor2] == 'o')
                     {
+<<<<<<< HEAD
                         unvisited.Add(new Point(ver2, hor2 - 1, unvisited[0].Length + 1));
                         points[ver2, hor2 - 1] = new Point(ver2, hor2 - 1, length);
                         Console.WriteLine("left");
@@ -129,6 +347,11 @@ namespace code
                             Console.WriteLine(counter);
                             break;
                         }
+=======
+                        twotwenty = X;
+                        Console.WriteLine(twotwenty);
+                        strength += 220 * X;
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
                     }
 
                 }
@@ -186,6 +409,7 @@ namespace code
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -425,6 +649,8 @@ namespace code
             }
 
 
+=======
+>>>>>>> eec0caa71b86ece3099bc67fd6d6283d0103b5b6
             Console.WriteLine(strength);
              */                         ///////////////////////////////////////
 
