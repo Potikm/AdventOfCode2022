@@ -27,7 +27,14 @@ namespace code
 
             Point[,] points = new Point[array.Count, array[0].Count];
 
-           
+            for (int i = 0; i < points.GetLength(0); i++)
+            {
+                for (int j = 0; j < points.GetLength(1); j++)
+                {
+                    points[i, j] = new Point(0,0,-1);
+                }
+            }
+
 
             int ver = 0;
             int hor = 0;
@@ -44,13 +51,14 @@ namespace code
 
                         points[i, j] = new Point(i, j, length);
                         unvisited.Add(new Point(i, j, length));
+                        array[i][j] = 'a';
                         ver = i;
                         hor = j;
                       
                     }
                 }
             }
-
+            int counter = 0;
             while(unvisited.Count > 0)
             {
                 int ver2 = unvisited[0].ver;
@@ -58,37 +66,116 @@ namespace code
                 int index =  alphabet.IndexOf(array[ver2][hor2]);
 
                 //top
-                if (ver2 > 0 && points[ver2 - 1, hor2] == null && array[ver2-1][hor2] == alphabet[index] || array[ver2 - 1][hor2] == alphabet[index + 1])
+                Console.WriteLine(array[ver2][hor2]);
+                Console.WriteLine(index);
+               
+                if (ver2 > 0)
                 {
-                    unvisited.Add(new Point(ver2 - 1, hor2, unvisited[0].Length + 1));
+                    if (ver2 > 0 && points[ver2 - 1, hor2].Length == -1 && array[ver2 - 1][hor2] == alphabet[index] || array[ver2 - 1][hor2] == alphabet[index + 1])
+                    {
+                        unvisited.Add(new Point(ver2 - 1, hor2, unvisited[0].Length + 1));
+                        points[ver2 - 1, hor2] = new Point(ver2 - 1, hor2, length);
 
+                        Console.WriteLine("top");
+                        if (array[ver2 - 1][hor2] == 'E')
+                        {
+                            Console.WriteLine((ver2 - 1) + " " + hor2);
+                            Console.WriteLine(counter);
+                            break;
+                        }
+                    }
+
+                    if (points[ver2 - 1, hor2].Length == -1 && array[ver2 - 1][hor2] == 'm' && array[ver2][hor2] == 'o')
+                    {
+                        unvisited.Add(new Point(ver2 - 1, hor2, unvisited[0].Length + 1));
+                        points[ver2 - 1, hor2] = new Point(ver2 - 1, hor2, length);
+
+                        Console.WriteLine("top");
+                        if (array[ver2 - 1][hor2] == 'E')
+                        {
+                            Console.WriteLine((ver2 - 1) + " " + hor2);
+                            Console.WriteLine(counter);
+                            break;
+                        }
+                    }
                 }
+            
 
                 //left
-
-                if (hor2 > 0 && points[ver2, hor2 - 1] == null && array[ver2][hor2 - 1] == alphabet[index] || array[ver2][hor2 - 1] == alphabet[index + 1])
+            
+                if (hor2 > 0)
                 {
-                    unvisited.Add(new Point(ver2, hor2 - 1, unvisited[0].Length + 1));
+                    if (hor2 > 0 && points[ver2, hor2 - 1].Length == -1 && array[ver2][hor2 - 1] == alphabet[index] || array[ver2][hor2 - 1] == alphabet[index + 1])
+                    {
+                        unvisited.Add(new Point(ver2, hor2 - 1, unvisited[0].Length + 1));
+                        points[ver2, hor2 - 1] = new Point(ver2, hor2 - 1, length);
+                        Console.WriteLine("left");
+                        if (array[ver2][hor2 - 1] == 'E')
+                        {
+                            Console.WriteLine(ver2 + " " + (hor2 - 1));
+                            Console.WriteLine(counter);
+                            break;
+                        }
+                    }
+
+                    if (points[ver2, hor2 - 1].Length == -1 && array[ver2][hor2 - 1] == 'm' && array[ver2][hor2] == 'o')
+                    {
+                        unvisited.Add(new Point(ver2, hor2 - 1, unvisited[0].Length + 1));
+                        points[ver2, hor2 - 1] = new Point(ver2, hor2 - 1, length);
+                        Console.WriteLine("left");
+                        if (array[ver2][hor2 - 1] == 'E')
+                        {
+                            Console.WriteLine(ver2 + " " + (hor2 - 1));
+                            Console.WriteLine(counter);
+                            break;
+                        }
+                    }
 
                 }
+             
 
                 //right
-
-                if (hor2 < array[0].Count - 1 && points[ver2, hor2 + 1] == null && array[ver2][hor2 + 1] == alphabet[index] || array[ver2][hor2 + 1] == alphabet[index + 1])
+                if (hor2 < array[0].Count - 1)
                 {
-                    unvisited.Add(new Point(ver2, hor2 + 1, unvisited[0].Length + 1));
-
+                    if (hor2 < array[0].Count - 1 && points[ver2, hor2 + 1].Length == -1 && array[ver2][hor2 + 1] == alphabet[index] || array[ver2][hor2 + 1] == alphabet[index + 1])
+                    {
+                        unvisited.Add(new Point(ver2, hor2 + 1, unvisited[0].Length + 1));
+                        points[ver2, hor2 + 1] = new Point(ver2, hor2 + 1, length);
+                        Console.WriteLine("right");
+                        if (array[ver2][hor2 + 1] == 'E')
+                        {
+                            Console.WriteLine(ver2 + " " + (hor2 + 1));
+                            Console.WriteLine(counter);
+                            break;
+                        }
+                    }
                 }
+
+               
 
                 // bottom 
-
-                if (ver2 < array.Count - 1 && points[ver2 + 1, hor2] == null && array[ver2 + 1][hor2] == alphabet[index] || array[ver2 + 1][hor2] == alphabet[index + 1])
+                if (ver2 < array.Count - 1)
                 {
-                    unvisited.Add(new Point(ver2 + 1, hor2, unvisited[0].Length + 1));
-
+                    if (ver2 < array.Count - 1 && points[ver2 + 1, hor2].Length == -1 && array[ver2 + 1][hor2] == alphabet[index] || array[ver2 + 1][hor2] == alphabet[index + 1])
+                    {
+                        unvisited.Add(new Point(ver2 + 1, hor2, unvisited[0].Length + 1));
+                        points[ver2 + 1, hor2] = new Point(ver2 + 1, hor2, length);
+                        Console.WriteLine("bot");
+                        if (array[ver2 + 1][hor2] == 'E')
+                        {
+                            Console.WriteLine((ver2 + 1) + " " + hor2);
+                            Console.WriteLine(counter);
+                            break;
+                        }
+                    }
                 }
-                unvisited.RemoveAt(0);
 
+                counter++;
+                Console.WriteLine();
+
+                Console.WriteLine(unvisited[0].Length);
+                unvisited.RemoveAt(0);
+             
             }
           
 
